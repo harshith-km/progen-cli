@@ -181,16 +181,12 @@ create_backend() {
 create_frontend() {
     npm create vite@latest .
     npm install
-    npm install axios
+    npm install axios dotenv
 
-    cd public
-    rm vite.svg
-    cd ../
+    rm public/vite.svg
 
     cd src/
-    cd assets 
-    rm react.svg
-    cd ../
+    rm assets/react.svg
 
     rm App.css App.jsx index.css
     mkdir components pages 
@@ -199,6 +195,8 @@ create_frontend() {
     echo "$indexCSScode" > index.css
     echo "$appJSXcode" > App.jsx
 
+    cd ../
+
     echo "Frontend setup complete"
 }
 
@@ -206,7 +204,6 @@ create_frontend() {
 check_dependencies() {
     command -v npm >/dev/null 2>&1 || { echo >&2 "npm is required but it's not installed. Aborting."; exit 1; }
     command -v node >/dev/null 2>&1 || { echo >&2 "node is required but it's not installed. Aborting."; exit 1; }
-    command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
 }
 
 # Main script execution

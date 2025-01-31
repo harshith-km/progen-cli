@@ -1,4 +1,4 @@
-# progen - Project Generator
+![image](https://github.com/user-attachments/assets/1a908f9b-cc82-4fef-b33f-815ab47f0fe1)# progen - Project Generator
 
 progen is a simple and lightweight Bash script that automates the setup of Fullstack, Frontend, or Backend projects. It creates the necessary directories and files for a quick development start, including backend (Node.js/Express/MongoDB) and frontend (React/Vite) configurations.
 
@@ -13,17 +13,16 @@ progen is a simple and lightweight Bash script that automates the setup of Fulls
 
 
 ## Installation
-Clone the Repository
-`git clone https://github.com/your-username/progen.git`
+Clone the Repository<br>
+`git clone https://github.com/your-username/progen.git`<br>
 `cd progen`
 
 ## Make the Script Executable
 `chmod +x progen.sh`
 
 ## Usage
-Run the script and follow the prompts:
+Run the script and follow the prompts:<br>
 `./progen.sh`
-
 
 ## Project Types
 1. Fullstack: Creates backend (Node.js + Express + MongoDB) and frontend (React + Vite) directories.
@@ -31,11 +30,14 @@ Run the script and follow the prompts:
 3. Backend: Sets up an Express/MongoDB backend.
 
 
-## Example
-
-`./progen.sh`
+## Example<br>
+`./progen.sh`<br>
 
 Output:
+<br>
+![image](https://github.com/user-attachments/assets/48e34230-5e25-44d8-a1d4-60fa9fefe428)
+
+
 
 
 ## Project Structure
@@ -80,6 +82,6 @@ my-app/
 - Axios
 - Contributing
 
-Feel free to contribute by submitting issues or pull requests.
-License
-This project is licensed under the MIT License.
+Feel free to contribute by submitting issues or pull requests.<br>
+License<br>
+This project is licensed under the MIT License.<br><br><br>

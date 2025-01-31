@@ -1,5 +1,9 @@
+#!/bin/bash
+
+# Environment variables
 dotenv='MONGO_URI=mongodb://localhost:27017/todo'
 
+# JavaScript code snippets
 indexJScode='const express = require("express");
 const dotenv = require("dotenv");
 require("dotenv").config({ path: "../.env" });
@@ -9,7 +13,6 @@ const taskRoutes = require("./routes/taskRoutes");
 
 dotenv.config();
 connectDB();
-
 
 const app = express();
 app.use(cors());
@@ -156,36 +159,26 @@ const TaskList = () => {
 
 export default TaskList;'
 
-# backend
-createBackend(){
+# Function to create backend
+create_backend() {
     npm init -y
     npm install express cors dotenv mongoose
-    echo "installed node packages : express, cors, dotenv and mongoose"
+    echo "Installed node packages: express, cors, dotenv, and mongoose"
 
     echo "$indexJScode" > index.js
 
-    mkdir config controllers models routes middleware
+    mkdir config controllers models routes
 
-    cd config
-    echo "$dbJScode" > db.js
-    cd ../
+    echo "$dbJScode" > config/db.js
+    echo "$controllerJScode" > controllers/taskController.js
+    echo "$taskJScode" > models/Task.js
+    echo "$routesJScode" > routes/taskRoutes.js
 
-    cd controllers
-    echo "$controllerJScode" > taskController.js
-    cd ../
-
-    cd models
-    echo "$taskJScode" > Task.js
-    cd ../
-
-    cd routes
-    echo "$routesJScode" > taskRoutes.js
-    cd ../
-
-    # node index.js
+    echo "Backend setup complete"
 }
 
-createFrontend(){
+# Function to create frontend
+create_frontend() {
     npm create vite@latest .
     npm install
     npm install axios
@@ -202,62 +195,80 @@ createFrontend(){
     rm App.css App.jsx index.css
     mkdir components pages 
 
-
-    cd components
-    echo "$componentsJSXcode" > TaskList.jsx
-    cd ../
+    echo "$componentsJSXcode" > components/TaskList.jsx
     echo "$indexCSScode" > index.css
     echo "$appJSXcode" > App.jsx
 
-    # changing directory from src to parent 
-    cd ../
-
-    # npm run dev
+    echo "Frontend setup complete"
 }
 
+# Check for required dependencies
+check_dependencies() {
+    command -v npm >/dev/null 2>&1 || { echo >&2 "npm is required but it's not installed. Aborting."; exit 1; }
+    command -v node >/dev/null 2>&1 || { echo >&2 "node is required but it's not installed. Aborting."; exit 1; }
+    command -v git >/dev/null 2>&1 || { echo >&2 "git is required but it's not installed. Aborting."; exit 1; }
+}
 
-# Clear screen and display title
-clear
-echo "=============================="
-echo "  Project Setup Script  "
-echo "=============================="
+# Main script execution
+main() {
+    check_dependencies
 
-# Ask for project type
-echo "Select the option from below:"
-echo "1. Fullstack"
-echo "2. Frontend"
-echo "3. Backend"
-read -p "(1, 2, 3): " type
+    clear
+    echo "=============================="
+    echo "  Project Setup Script  "
+    echo "=============================="
 
-# Ask for project name
-read -p "Enter the project name: " project_name
+    # Ask for project type
+    echo "Select the option from below:"
+    echo "1. Fullstack"
+    echo "2. Frontend"
+    echo "3. Backend"
+    read -p "(1, 2, 3): " type
 
-# Create project directory
-mkdir "$project_name"
-cd "$project_name" || exit
+    # Ask for project name
+    read -p "Enter the project name: " project_name
 
-if [ "$type" -eq 1 ]; then 
-    echo "$dotenv" > .env
-    mkdir backend frontend
-    cd backend
-    createBackend
-    cd ../
-    
-    cd frontend
-    createFrontend
-    cd ../
-elif [ "$type" -eq 2 ]; then
-    createFrontend
-    echo "$dotenv" > .env
-elif [ "$type" -eq 3 ]; then
-    echo "$dotenv" > .env
-    createBackend
-else
-    echo "Invalid selection, please try again"
-fi
+    # Create project directory
+    mkdir "$project_name"
+    cd "$project_name" || exit
 
-touch README.md .gitignore 
-echo "Project setup completed successfully!"
-echo "Opening Your project in VS code..."
-codium .
+    if [[ -z "$type" || ! "$type" =~ ^[0-9]+$ ]]; then
+      echo "Invalid selection, please enter a valid number (1, 2, or 3)"
+      exit 1
+    fi
 
+    if [ "$type" -eq 1 ]; then 
+        echo "$dotenv" > .env
+        mkdir backend frontend
+        cd backend
+        create_backend
+        cd ../
+        
+        cd frontend
+        create_frontend
+        cd ../
+    elif [ "$type" -eq 2 ]; then
+        create_frontend
+        echo "$dotenv" > .env
+    elif [ "$type" -eq 3 ]; then
+        echo "$dotenv" > .env
+        create_backend
+    else
+        echo "Invalid selection, please try again"
+        exit 1
+    fi
+
+    touch README.md .gitignore 
+    echo "Project setup completed successfully!"
+
+    read -p "Initiate Git repo? (y/n): " ans
+
+    if [[ "$ans" == y || "$ans" == Y ]]; then
+      git init
+    fi
+
+    echo "Opening your project in VS Code..."
+    command -v code >/dev/null 2>&1 && code . || echo "VS Code command 'code' not found. Please open the project manually."
+}
+
+main

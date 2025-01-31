@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1a908f9b-cc82-4fef-b33f-815ab47f0fe1)# progen - Project Generator
+# progen - Project Generator
 
 progen is a simple and lightweight Bash script that automates the setup of Fullstack, Frontend, or Backend projects. It creates the necessary directories and files for a quick development start, including backend (Node.js/Express/MongoDB) and frontend (React/Vite) configurations.
 

@@ -182,7 +182,7 @@ createBackend(){
     echo "$routesJScode" > taskRoutes.js
     cd ../
 
-    node index.js
+    # node index.js
 }
 
 createFrontend(){
@@ -209,7 +209,10 @@ createFrontend(){
     echo "$indexCSScode" > index.css
     echo "$appJSXcode" > App.jsx
 
-    npm run dev
+    # changing directory from src to parent 
+    cd ../
+
+    # npm run dev
 }
 
 
@@ -242,11 +245,10 @@ if [ "$type" -eq 1 ]; then
     
     cd frontend
     createFrontend
+    cd ../
 elif [ "$type" -eq 2 ]; then
     createFrontend
     echo "$dotenv" > .env
-    cd ../
-    
 elif [ "$type" -eq 3 ]; then
     echo "$dotenv" > .env
     createBackend
@@ -256,4 +258,6 @@ fi
 
 touch README.md .gitignore 
 echo "Project setup completed successfully!"
+echo "Opening Your project in VS code..."
+codium .
 

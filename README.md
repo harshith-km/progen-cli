@@ -10,6 +10,7 @@ progen is a simple and lightweight Bash script that automates the setup of Fulls
 - Creates a React frontend using Vite and installs necessary dependencies
 - Works in Linux, macOS, and WSL (Windows Subsystem for Linux)
 - No external dependencies required beyond Node.js and npm
+- Git Initialization Prompt for version control
 - opens the project folder in vscode at the end of script
 
 

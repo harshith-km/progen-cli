@@ -255,13 +255,14 @@ main() {
         exit 1
     fi
 
-    touch README.md .gitignore 
+    touch README.md 
     echo "Project setup completed successfully!"
 
     read -p "Initiate Git repo? (y/n): " ans
 
     if [[ "$ans" == y || "$ans" == Y ]]; then
       git init
+      touch .gitignore 
     fi
 
     echo "Opening your project in VS Code..."
